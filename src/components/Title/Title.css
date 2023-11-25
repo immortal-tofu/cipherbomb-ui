@@ -1,0 +1,8 @@
+.Title {
+  font-family: Bungee;
+  /* color: #9d4c00; */
+  font-size: 48px;
+  color: var(--primary-color);
+  text-shadow: -5px 5px 1px #000000;
+  margin: 15px 0;
+}

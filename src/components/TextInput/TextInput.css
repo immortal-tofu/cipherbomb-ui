@@ -1,0 +1,9 @@
+.TextInput {
+  font-family: 'Space Mono', sans-serif;
+  height: 32px;
+  box-shadow: -5px 5px 0 #000;
+  border: 0;
+  outline: 0;
+  margin: 0 10px;
+  padding: 0 8px;
+}

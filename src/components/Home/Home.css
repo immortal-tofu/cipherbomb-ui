@@ -1,0 +1,34 @@
+.Home__account {
+  text-overflow: ellipsis;
+  max-width: 80%;
+  overflow: hidden;
+}
+
+.Home__menu {
+  margin: 15px 0;
+}
+
+.Home__link {
+  font-family: Bungee;
+  font-size: 32px;
+  color: #fff;
+  text-shadow: -5px 5px 0 #000;
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.Home__link .lds-ripple {
+  top: -2px;
+  margin-left: 15px;
+}
+
+.Home__link:hover {
+  color: var(--primary-color);
+}
+
+.Home__link--disabled {
+  color: #444;
+  pointer-events: none;
+}

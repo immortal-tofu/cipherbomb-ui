@@ -1,0 +1,15 @@
+.ListPlayer__player {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 80%;
+  white-space: nowrap;
+  border-left: 4px solid var(--primary-color);
+  padding-left: 15px;
+  margin: 7px 0;
+}
+
+.ListPlayer__players {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}

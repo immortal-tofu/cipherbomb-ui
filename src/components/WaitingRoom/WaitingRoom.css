@@ -1,0 +1,17 @@
+.WaitingRoom__copied {
+  color: #00ff00;
+}
+
+.WaitingRoom__copy {
+  /* border: 1px solid #fff; */
+  padding: 15px 0;
+  cursor: pointer;
+}
+
+.WaitingRoom__copy:hover {
+}
+
+.WaitingRoom__actions {
+  display: flex;
+  margin-top: 15px;
+}

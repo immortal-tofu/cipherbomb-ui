@@ -1,6 +1,10 @@
+.Connect__info {
+  /* color: var(--primary-color); */
+  color: #fff;
+}
+
 .Connect__account {
   width: 100%;
-  max-width: 300px;
   text-overflow: ellipsis;
   overflow: hidden;
   margin: 0 auto;

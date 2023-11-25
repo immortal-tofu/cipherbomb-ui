@@ -1,10 +1,15 @@
-import { useEffect, useState } from 'react';
-import { Devnet } from './components/Devnet';
+import { ReactNode, useEffect, useState } from 'react';
 import { init } from './fhevmjs';
 import './App.css';
 import { Connect } from './components/Connect';
+import { BrowserProvider } from 'ethers';
+import { Layout } from './components/Layout';
 
-function App() {
+type AppProps = {
+  children: (account: string, provider: BrowserProvider) => ReactNode;
+};
+
+const App = ({ children }: AppProps) => {
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
@@ -18,14 +23,10 @@ function App() {
   if (!isInitialized) return null;
 
   return (
-    <>
-      <h1>fhevmjs</h1>
-      <Connect>{(account, provider) => <Devnet />}</Connect>
-      <p className="read-the-docs">
-        <a href="https://docs.zama.ai/fhevm">See the documentation for more information</a>
-      </p>
-    </>
+    <Layout>
+      <Connect>{children}</Connect>
+    </Layout>
   );
-}
+};
 
 export default App;

@@ -4,11 +4,13 @@ import { BrowserProvider } from 'ethers';
 import './Connect.css';
 import { Eip1193Provider } from 'ethers';
 import { createFhevmInstance } from '../../fhevmjs';
+import { Button } from '../Button';
+import { Title } from '../Title';
 
 const AUTHORIZED_CHAIN_ID = ['0x1f49', '0x1f4a', '0x1f4b', '0x2328'];
 
 export const Connect: React.FC<{
-  children: (account: string, provider: any) => React.ReactNode;
+  children: (account: string, provider: BrowserProvider) => React.ReactNode;
 }> = ({ children }) => {
   const [connected, setConnected] = useState(false);
   const [validNetwork, setValidNetwork] = useState(false);
@@ -112,11 +114,12 @@ export const Connect: React.FC<{
     if (!validNetwork) {
       return (
         <div>
+          <Title>Cipher Bomb</Title>
           <p>You're not on the correct network</p>
           <p>
-            <button className="Connect__button" onClick={switchNetwork}>
+            <Button className="Connect__button" onClick={switchNetwork}>
               Switch to Zama Devnet
-            </button>
+            </Button>
           </p>
         </div>
       );
@@ -132,11 +135,14 @@ export const Connect: React.FC<{
   const connectInfos = (
     <div className="Connect__info">
       {!connected && (
-        <button className="Connect__button" onClick={connect}>
-          Connect your wallet
-        </button>
+        <div>
+          <Title>Cipher Bomb</Title>
+          <Button className="Connect__button" onClick={connect}>
+            Connect your wallet
+          </Button>
+        </div>
       )}
-      {connected && <div className="Connect__account">Connected with {account}</div>}
+      {/* {connected && <div className="Connect__account">Welcome {account}</div>} */}
     </div>
   );
 

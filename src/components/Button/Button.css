@@ -1,0 +1,14 @@
+.Button {
+  font-family: 'Space Mono', sans-serif;
+  background: var(--primary-color);
+  border: 0;
+  border-radius: 0;
+  box-shadow: -5px 5px 0 #000;
+  outline: 0;
+  padding: 7px;
+}
+
+.Button:hover {
+  border: 0;
+  box-shadow: -5px 5px 0 #000;
+}
