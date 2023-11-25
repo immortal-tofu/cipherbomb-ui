@@ -1,9 +1,10 @@
-import { ReactNode, useEffect, useState } from 'react';
-import { init } from './fhevmjs';
-import './App.css';
-import { Connect } from './components/Connect';
 import { BrowserProvider } from 'ethers';
-import { Layout } from './components/Layout';
+import { ReactNode, useEffect, useState } from 'react';
+
+import { init } from './fhevmjs';
+import { Connect, Layout } from './modules/common-ui';
+
+import './App.css';
 
 type AppProps = {
   children: (account: string, provider: BrowserProvider) => ReactNode;

@@ -1,14 +1,13 @@
+import { isAddress } from 'ethers';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, redirect, RouterProvider } from 'react-router-dom';
-import App from './App';
+import { RouterProvider, createBrowserRouter, redirect } from 'react-router-dom';
 
-import { Home } from './components/Home';
-import { JoinGame } from './components/JoinGame';
+import App from './App';
+import { Game, JoinGame } from './modules/game';
+import { Home } from './modules/home';
 
 import './index.css';
-import { Game } from './components/Game';
-import { isAddress } from 'ethers';
 
 const router = createBrowserRouter([
   {

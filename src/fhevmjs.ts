@@ -1,5 +1,5 @@
 import { BrowserProvider } from 'ethers';
-import { initFhevm, createInstance, FhevmInstance } from 'fhevmjs';
+import { FhevmInstance, createInstance, initFhevm } from 'fhevmjs';
 
 export const init = async () => {
   await initFhevm();
