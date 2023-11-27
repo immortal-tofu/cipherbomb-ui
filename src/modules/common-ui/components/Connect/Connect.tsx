@@ -1,4 +1,4 @@
-import { BrowserProvider } from 'ethers';
+import { BrowserProvider, getAddress } from 'ethers';
 import { Eip1193Provider } from 'ethers';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -20,7 +20,7 @@ export const Connect: React.FC<{
   const [provider, setProvider] = useState<BrowserProvider | null>(null);
 
   const refreshAccounts = (accounts: string[]) => {
-    setAccount(accounts[0] || '');
+    setAccount(getAddress(accounts[0]) || '');
     setConnected(accounts.length > 0);
   };
 
@@ -31,12 +31,12 @@ export const Connect: React.FC<{
 
   const refreshNetwork = useCallback(async () => {
     if (await hasValidNetwork()) {
-      await createFhevmInstance();
+      await createFhevmInstance(account);
       setValidNetwork(true);
     } else {
       setValidNetwork(false);
     }
-  }, []);
+  }, [account]);
 
   const refreshProvider = (eth: Eip1193Provider) => {
     const p = new BrowserProvider(eth);
@@ -72,7 +72,7 @@ export const Connect: React.FC<{
     const accounts: string[] = await provider.send('eth_requestAccounts', []);
 
     if (accounts.length > 0) {
-      setAccount(accounts[0]);
+      setAccount(getAddress(accounts[0]));
       setConnected(true);
       if (!(await hasValidNetwork())) {
         await switchNetwork();

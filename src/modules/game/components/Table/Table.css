@@ -1,0 +1,23 @@
+@media only screen and (min-width: 64em) {
+  .Table__informations {
+    display: flex;
+    justify-content: space-between;
+  }
+  .Table__informations > div {
+    min-width: 48%;
+  }
+}
+
+.Table__deal {
+  display: flex;
+  margin-top: 15px;
+  align-items: center;
+}
+
+.Table__informations {
+  margin-bottom: 45px;
+}
+
+.Table__actions button {
+  margin-right: 15px;
+}

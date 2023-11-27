@@ -1,0 +1,74 @@
+.CardDisplay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.CardDisplay__card {
+  width: 300px;
+  height: 500px;
+  background: var(--fourth-color) var(--bg-card) center center no-repeat;
+  background-size: cover;
+  animation: turnRole 1s ease-in;
+  border-radius: 15px;
+  box-shadow: -5px 5px 0 #000;
+}
+
+.CardDisplay__card.CardDisplay__bad {
+  --bg-card: url('https://christopherstarr.files.wordpress.com/2013/01/randall.jpg');
+}
+
+.CardDisplay__card.CardDisplay__good {
+  --bg-card: url('https://as1.ftcdn.net/v2/jpg/01/95/05/50/1000_F_195055061_A112Kvjh9Bq5FFkdLIAnmk8Lh0MRdLrd.jpg');
+}
+
+.CardDisplay__card.CardDisplay__wire {
+  --bg-card: url('https://i.stack.imgur.com/K9jSi.jpg');
+}
+
+.CardDisplay__card.CardDisplay__bomb {
+  --bg-card: url('https://media.gettyimages.com/id/185410981/fr/photo/a-time-bomb.jpg?s=612x612&w=gi&k=20&c=tLm5Onl-r9Sx7t9_p9h13nAJKWvr96piVWRXJdil_gM=');
+}
+
+.CardDisplay__card.CardDisplay__neutral {
+  --bg-card: url('https://cdn.akamai.steamstatic.com/steam/apps/1534200/ss_d0fcb94c4fc2cc1cc01ca46d5c31840da74d9694.600x338.jpg?t=1616065824');
+}
+
+/* Keyframes */
+@keyframes turnRole {
+  0% {
+    width: 0;
+    height: 0;
+    background-image: none;
+    transform: scaleX(-1);
+  }
+  20% {
+    background-image: var(--bg-card);
+    transform: scaleX(1);
+  }
+  40% {
+    background-image: none;
+    transform: scaleX(-1);
+  }
+  60% {
+    background-image: var(--bg-card);
+    transform: scaleX(1);
+  }
+  80% {
+    background-image: none;
+    transform: scaleX(-1);
+  }
+  100% {
+    background-image: var(--bg-card);
+    background-color: var(--fourth-color);
+    width: 300px;
+    height: 500px;
+    transform: scaleX(1);
+  }
+}

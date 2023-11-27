@@ -1,7 +1,7 @@
 .ListPlayer__player {
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 80%;
+  width: calc(100vw - 30vw);
   white-space: nowrap;
   border-left: 4px solid var(--primary-color);
   padding-left: 15px;

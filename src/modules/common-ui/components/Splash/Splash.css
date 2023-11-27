@@ -1,0 +1,47 @@
+.Splash {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Splash__message {
+  font-family: Bungee;
+  font-size: 64px;
+  line-height: 1em;
+  color: var(--primary-color);
+  text-shadow: -10px 10px 0 #000;
+  animation: splashAnimation 1s ease-out;
+}
+@media only screen and (min-width: 64em) {
+  .Splash__message {
+    font-size: 96px;
+  }
+}
+
+.Splash__message.Splash__bad {
+  color: #da2b08;
+}
+
+.Splash__message.Splash__good {
+  color: var(--primary-color);
+}
+
+/* Keyframes */
+@keyframes splashAnimation {
+  0% {
+    font-size: 0;
+    transform: rotate(360deg);
+  }
+  30% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}

@@ -1,7 +1,14 @@
 body {
   background-color: #bbb;
-  background-image: radial-gradient(circle at center center, #00499d, rgb(0, 0, 0, 1)),
-    repeating-radial-gradient(circle at center center, #133357, #00499d, 10px, transparent 20px, transparent 10px);
+  background-image: radial-gradient(circle at center center, var(--secondary-color), rgb(0, 0, 0, 1)),
+    repeating-radial-gradient(
+      circle at center center,
+      #133357,
+      var(--secondary-color),
+      10px,
+      transparent 20px,
+      transparent 10px
+    );
   /* background-image: radial-gradient(circle at center center, #00499d, rgb(0, 0, 0, 1)),
     repeating-radial-gradient(circle at center center, #00499d, #00499d, 10px, transparent 20px, transparent 10px); */
   background-blend-mode: multiply;
