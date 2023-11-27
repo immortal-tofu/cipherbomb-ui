@@ -10,7 +10,7 @@ export type CardsDeckProps = {
 };
 
 export const CardsDeck = ({ size, cards, displayed = false }: CardsDeckProps) => {
-  let faces = new Array(size).fill(2); // neutral
+  let faces: number[] = new Array(size).fill(2); // neutral
   if (cards) {
     faces = faces.map((_, i) => {
       if (i < cards[0]) {
@@ -23,7 +23,7 @@ export const CardsDeck = ({ size, cards, displayed = false }: CardsDeckProps) =>
   }
   const cardsElement = new Array(size).fill(null).map((_, i) => {
     return (
-      <div className="CardsDeck_cardContainer" key={i}>
+      <div className="CardsDeck_cardContainer" key={`${i}-${faces[i]}`}>
         <div
           className={classNames('CardsDeck__card', {
             CardsDeck__displayed: displayed,

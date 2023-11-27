@@ -1,4 +1,4 @@
-import { Contract, ContractEventPayload } from 'ethers';
+import { Contract } from 'ethers';
 import { useCallback, useEffect, useState } from 'react';
 
 import { getInstance, getTokenSignature } from '../../../../fhevmjs';

@@ -131,7 +131,7 @@ export const Game = ({ account, provider }: GameProps) => {
         void gameContract.off(gameContract.filters.BadGuysWin, onBadGuysWin);
       };
     }
-  }, [contract, onPlayerNameChanged, onPlayerJoined, onPlayerLeave]);
+  }, [contract, refreshPlayers, refreshInformations, onPlayerNameChanged, onPlayerJoined, onPlayerLeave]);
 
   useEffect(() => {
     void refreshInformations();
