@@ -5,8 +5,9 @@ import { useParams } from 'react-router-dom';
 import { abi } from '../../../../abi/cipherbomb.json';
 import { getEventContract, getReadContract, onNextBlock } from '../../../../utils/rpc';
 import { Splash } from '../../../common-ui/components/Splash';
+import badGuysWin from '../../assets/badguyswin.mp3';
 import begin from '../../assets/begin.mp3';
-import goodGuysWin from '../../assets/good_guys_win.mp3';
+import goodGuysWin from '../../assets/goodguyswin.mp3';
 import { Table } from '../Table';
 import { WaitingRoom } from '../WaitingRoom';
 
@@ -111,6 +112,7 @@ export const Game = ({ account, provider }: GameProps) => {
     };
 
     const onBadGuysWin = (reason: string) => {
+      void new Audio(badGuysWin).play();
       setEndGame(reason === 'bomb' ? 'bomb' : 'bad');
       onNextBlock(refreshInformations);
       onNextBlock(refreshPlayers);

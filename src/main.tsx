@@ -14,7 +14,7 @@ const router = createHashRouter([
     path: '/',
     element: (
       <React.StrictMode>
-        <App>{(account, provider) => <Home account={account} provider={provider} />}</App>
+        <App music>{(account, provider) => <Home account={account} provider={provider} />}</App>
       </React.StrictMode>
     ),
   },
@@ -22,7 +22,7 @@ const router = createHashRouter([
     path: 'rules',
     element: (
       <React.StrictMode>
-        <App>{(account, provider) => <Rules account={account} provider={provider} />}</App>
+        <App music>{(account, provider) => <Rules account={account} provider={provider} />}</App>
       </React.StrictMode>
     ),
   },
@@ -30,7 +30,7 @@ const router = createHashRouter([
     path: 'join',
     element: (
       <React.StrictMode>
-        <App>{(account, provider) => <JoinGame account={account} provider={provider} />}</App>
+        <App music>{(account, provider) => <JoinGame account={account} provider={provider} />}</App>
       </React.StrictMode>
     ),
   },

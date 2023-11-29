@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { BrowserProvider, ContractFactory } from 'ethers';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import cipherbomb from '../../../../abi/cipherbomb.json';
@@ -16,6 +16,7 @@ type HomeProps = {
 export const Home = ({ account, provider }: HomeProps) => {
   const [createLoading, setCreateLoading] = useState(false);
   const navigate = useNavigate();
+
   const createARoom = async () => {
     if (createLoading) return;
     const contractFactory = new ContractFactory(cipherbomb.abi, cipherbomb.bytecode, await provider.getSigner());

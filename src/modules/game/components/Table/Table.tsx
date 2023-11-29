@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { getInstance, getTokenSignature } from '../../../../fhevmjs';
 import { getEventContract, getReadContract, onNextBlock } from '../../../../utils/rpc';
 import { Button, Loader, Subtitle, Title } from '../../../common-ui';
+import card from '../../assets/card.mp3';
 import { CardDisplay } from '../CardDisplay';
 import { TablePlayers } from '../TablePlayers';
 
@@ -57,7 +58,7 @@ export const Table = ({ contract, account, players }: TableProps) => {
 
   useEffect(() => {
     const onCardPicked = (cp: number) => {
-      console.log('picked', cp);
+      void new Audio(card).play();
       setCardPicked(Number(cp));
       setCardOpen(true);
       onNextBlock(refresh);
@@ -81,6 +82,7 @@ export const Table = ({ contract, account, players }: TableProps) => {
   const instance = getInstance(account);
 
   const onRole = async () => {
+    void new Audio(card).play();
     if (role == null) {
       const contractAddress = await contract.getAddress();
       const token = await getTokenSignature(contractAddress, account);
