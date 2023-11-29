@@ -3,7 +3,7 @@ import { Contract, JsonRpcProvider, WebSocketProvider } from 'ethers';
 // const JSONRPC_URL = 'http://localhost:8545/';
 // const WEBSOCKET_URL = 'ws://localhost:8546';
 const JSONRPC_URL = 'https://devnet.zama.ai/';
-const WEBSOCKET_URL = 'ws://devnet.ws.zama.ai:8546/';
+const WEBSOCKET_URL = 'wss://devnet.ws.zama.ai/';
 
 const jsonProvider = new JsonRpcProvider(JSONRPC_URL);
 const wsProvider = new WebSocketProvider(WEBSOCKET_URL);
