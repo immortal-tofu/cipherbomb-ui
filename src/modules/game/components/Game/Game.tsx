@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { abi } from '../../../../abi/cipherbomb.json';
-import { getReadContract, getWsProvider, onNextBlock } from '../../../../utils/rpc';
+import { getEventContract, getReadContract, onNextBlock } from '../../../../utils/rpc';
 import { Splash } from '../../../common-ui/components/Splash';
 import { Table } from '../Table';
 import { WaitingRoom } from '../WaitingRoom';
@@ -43,7 +43,6 @@ export const Game = ({ account, provider }: GameProps) => {
         }
         return p;
       });
-      console.log(newPlayers);
       setPlayers(newPlayers);
     },
     [players],
@@ -112,8 +111,7 @@ export const Game = ({ account, provider }: GameProps) => {
     };
 
     if (contract) {
-      const wsProvider = getWsProvider();
-      const gameContract = contract.connect(wsProvider);
+      const gameContract = getEventContract(contract);
       void gameContract.on(gameContract.filters.GameOpen, gameHasBeenOpen);
       void gameContract.on(gameContract.filters.GameStart, gameHasStarted);
       void gameContract.on(gameContract.filters.PlayerNameChanged, onPlayerNameChanged);

@@ -19,6 +19,7 @@ export const WaitingRoom = ({ contract, account, players, currentName = '' }: Wa
   const [isOwner, setIsOwner] = useState(false);
   const [copied, setCopied] = useState(false);
   const [gameLoading, setGameLoading] = useState(false);
+  const [inGame, setInGame] = useState(false);
   const [minPlayers, setMinPlayers] = useState(0);
   const [maxPlayers, setMaxPlayers] = useState(0);
 
@@ -27,6 +28,10 @@ export const WaitingRoom = ({ contract, account, players, currentName = '' }: Wa
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  useEffect(() => {
+    setInGame(players.some((player) => player.address === account));
+  }, [players, account]);
 
   useEffect(() => {
     const refreshInformations = async () => {
@@ -46,13 +51,20 @@ export const WaitingRoom = ({ contract, account, players, currentName = '' }: Wa
     setGameLoading(false);
   };
 
+  const joinGame = async () => {
+    const startTx = await contract.start();
+    setGameLoading(true);
+    await startTx.wait();
+    setGameLoading(false);
+  };
+
   if (!contract) return null;
 
   return (
     <div>
       <Back />
       <Title>Waiting room</Title>
-      <PlayerName contract={contract} currentName={currentName} />
+      {inGame && <PlayerName contract={contract} currentName={currentName} />}
       <Subtitle>Players ({players.length})</Subtitle>
       <ListPlayers players={players} />
       <div className="WaitingRoom__copy" onClick={copyLink}>
@@ -62,6 +74,14 @@ export const WaitingRoom = ({ contract, account, players, currentName = '' }: Wa
         <div className="WaitingRoom__actions">
           <Button onClick={startGame} disabled={players.length < minPlayers || gameLoading}>
             Start game{players.length < minPlayers && ' (not enough players)'}
+          </Button>
+          {gameLoading && <Loader />}
+        </div>
+      )}
+      {!inGame && (
+        <div className="WaitingRoom__actions">
+          <Button onClick={joinGame} disabled={players.length >= maxPlayers || gameLoading}>
+            Join
           </Button>
           {gameLoading && <Loader />}
         </div>

@@ -9,7 +9,7 @@ type JoinGameProps = {
   provider: BrowserProvider;
 };
 
-export const JoinGame = (props: JoinGameProps) => {
+export const JoinGame = (_: JoinGameProps) => {
   const navigate = useNavigate();
   const [contractAddress, setContractAddress] = useState<string>('');
   const onClick = () => {

@@ -2,7 +2,7 @@ import { Contract } from 'ethers';
 import { useCallback, useEffect, useState } from 'react';
 
 import { getInstance, getTokenSignature } from '../../../../fhevmjs';
-import { getReadContract, getWsProvider, onNextBlock } from '../../../../utils/rpc';
+import { getEventContract, getReadContract, onNextBlock } from '../../../../utils/rpc';
 import { Button, Loader, Subtitle, Title } from '../../../common-ui';
 import { CardDisplay } from '../CardDisplay';
 import { TablePlayers } from '../TablePlayers';
@@ -68,8 +68,7 @@ export const Table = ({ contract, account, players }: TableProps) => {
     };
 
     if (contract) {
-      const wsProvider = getWsProvider();
-      const gameContract = contract.connect(wsProvider);
+      const gameContract = getEventContract(contract);
       void gameContract.on(gameContract.filters.CardPicked, onCardPicked);
       void gameContract.on(gameContract.filters.GoodDeal, onGoodDeal);
       return () => {

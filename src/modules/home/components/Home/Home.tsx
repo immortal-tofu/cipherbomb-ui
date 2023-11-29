@@ -23,7 +23,6 @@ export const Home = ({ account, provider }: HomeProps) => {
     setCreateLoading(true);
     await c.waitForDeployment();
     const address = await c.getAddress();
-    console.log(address);
     navigate(`/game/${address}`);
   };
   return (

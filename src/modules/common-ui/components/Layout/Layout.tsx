@@ -1,7 +1,5 @@
 import { ReactNode } from 'react';
 
-import { Title } from '../Title';
-
 import './Layout.css';
 
 type LayoutProps = {
