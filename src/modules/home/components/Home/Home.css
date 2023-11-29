@@ -9,14 +9,18 @@
 }
 
 .Home__link {
+  display: flex;
+  align-items: center;
+}
+
+.Home__link a,
+.Home__link span {
   font-family: Bungee;
   font-size: 32px;
   color: #fff;
   text-shadow: -5px 5px 0 #000;
   text-decoration: none;
   cursor: pointer;
-  display: flex;
-  align-items: center;
 }
 
 .Home__link .lds-ripple {
@@ -24,11 +28,22 @@
   margin-left: 15px;
 }
 
-.Home__link:hover {
+.Home__link a:hover,
+.Home__link span:hover {
   color: var(--primary-color);
 }
 
-.Home__link--disabled {
-  color: #444;
+.Home__link--disabled a,
+.Home__link--disabled span {
+  color: #444 !important;
   pointer-events: none;
+}
+
+.Home__link--small {
+  margin-top: 30px;
+}
+
+.Home__link--small a {
+  color: var(--fifth-color);
+  font-size: 1.4em;
 }

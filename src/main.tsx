@@ -5,7 +5,7 @@ import { RouterProvider, createHashRouter, redirect } from 'react-router-dom';
 
 import App from './App';
 import { Game, JoinGame } from './modules/game';
-import { Home, Rules } from './modules/home';
+import { About, Home, Rules } from './modules/home';
 
 import './index.css';
 
@@ -22,7 +22,7 @@ const router = createHashRouter([
     path: 'rules',
     element: (
       <React.StrictMode>
-        <App music>{(account, provider) => <Rules account={account} provider={provider} />}</App>
+        <App music>{() => <Rules />}</App>
       </React.StrictMode>
     ),
   },
@@ -45,6 +45,14 @@ const router = createHashRouter([
     element: (
       <React.StrictMode>
         <App>{(account, provider) => <Game account={account} provider={provider} />}</App>
+      </React.StrictMode>
+    ),
+  },
+  {
+    path: 'about',
+    element: (
+      <React.StrictMode>
+        <App music>{() => <About />}</App>
       </React.StrictMode>
     ),
   },

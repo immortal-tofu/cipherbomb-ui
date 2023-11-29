@@ -1,13 +1,6 @@
-import { BrowserProvider } from 'ethers';
-
 import { Back, Subtitle, Title } from '../../../common-ui';
 
-type RulesProps = {
-  account: string;
-  provider: BrowserProvider;
-};
-
-export const Rules = (_: RulesProps) => {
+export const Rules = () => {
   return (
     <div>
       <Back />

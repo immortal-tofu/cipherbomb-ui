@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { BrowserProvider, ContractFactory } from 'ethers';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import cipherbomb from '../../../../abi/cipherbomb.json';
@@ -26,25 +26,24 @@ export const Home = ({ account, provider }: HomeProps) => {
     const address = await c.getAddress();
     navigate(`/game/${address}`);
   };
+
   return (
     <div className="Home">
       <Title>Cipher Bomb</Title>
       <div className="Home__account">Welcome, {account}</div>
       <div className="Home__menu">
-        <div>
-          <span onClick={createARoom} className={classNames('Home__link', { 'Home__link--disabled': createLoading })}>
-            Create a room {createLoading && <Loader />}
-          </span>
+        <div className={classNames('Home__link Home__link', { 'Home__link--disabled': createLoading })}>
+          <span onClick={createARoom}>Create a room</span>
+          {createLoading && <Loader />}
         </div>
-        <div>
-          <Link to="/join" className={classNames('Home__link', { 'Home__link--disabled': createLoading })}>
-            Join a room
-          </Link>
+        <div className={classNames('Home__link Home__link', { 'Home__link--disabled': createLoading })}>
+          <Link to="/join">Join a room</Link>
         </div>
-        <div>
-          <Link to="/rules" className={classNames('Home__link', { 'Home__link--disabled': createLoading })}>
-            Rules
-          </Link>
+        <div className={classNames('Home__link Home__link', { 'Home__link--disabled': createLoading })}>
+          <Link to="/rules">Rules</Link>
+        </div>
+        <div className={classNames('Home__link Home__link--small', { 'Home__link--disabled': createLoading })}>
+          <Link to="/about">About</Link>
         </div>
       </div>
     </div>
