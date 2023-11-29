@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import { abi } from '../../../../abi/cipherbomb.json';
 import { getEventContract, getReadContract, onNextBlock } from '../../../../utils/rpc';
 import { Splash } from '../../../common-ui/components/Splash';
+import begin from '../../assets/begin.mp3';
+import goodGuysWin from '../../assets/good_guys_win.mp3';
 import { Table } from '../Table';
 import { WaitingRoom } from '../WaitingRoom';
 
@@ -92,13 +94,17 @@ export const Game = ({ account, provider }: GameProps) => {
 
   useEffect(() => {
     const gameHasStarted = () => {
-      onNextBlock(() => setGameIsRunning(true));
+      onNextBlock(() => {
+        void new Audio(begin).play();
+        setGameIsRunning(true);
+      });
     };
     const gameHasBeenOpen = () => {
       onNextBlock(refreshInformations);
     };
 
     const onGoodGuysWin = () => {
+      void new Audio(goodGuysWin).play();
       setEndGame('good');
       onNextBlock(refreshInformations);
       onNextBlock(refreshPlayers);
