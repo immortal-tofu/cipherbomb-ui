@@ -52,7 +52,7 @@ export const WaitingRoom = ({ contract, account, players, currentName = '' }: Wa
   };
 
   const joinGame = async () => {
-    const startTx = await contract.start();
+    const startTx = await contract.join();
     setGameLoading(true);
     await startTx.wait();
     setGameLoading(false);

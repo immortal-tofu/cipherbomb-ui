@@ -1,20 +1,28 @@
 import { isAddress } from 'ethers';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { RouterProvider, createBrowserRouter, redirect } from 'react-router-dom';
+import { RouterProvider, createHashRouter, redirect } from 'react-router-dom';
 
 import App from './App';
 import { Game, JoinGame } from './modules/game';
-import { Home } from './modules/home';
+import { Home, Rules } from './modules/home';
 
 import './index.css';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: (
       <React.StrictMode>
         <App>{(account, provider) => <Home account={account} provider={provider} />}</App>
+      </React.StrictMode>
+    ),
+  },
+  {
+    path: 'rules',
+    element: (
+      <React.StrictMode>
+        <App>{(account, provider) => <Rules account={account} provider={provider} />}</App>
       </React.StrictMode>
     ),
   },
@@ -30,7 +38,7 @@ const router = createBrowserRouter([
     path: 'game/:contractAddress',
     loader: ({ params }) => {
       if (!params.contractAddress || !isAddress(params.contractAddress)) {
-        return redirect('/') as Response;
+        return redirect('/');
       }
       return null;
     },

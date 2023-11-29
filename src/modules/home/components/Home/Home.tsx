@@ -40,6 +40,11 @@ export const Home = ({ account, provider }: HomeProps) => {
             Join a room
           </Link>
         </div>
+        <div>
+          <Link to="/rules" className={classNames('Home__link', { 'Home__link--disabled': createLoading })}>
+            Rules
+          </Link>
+        </div>
       </div>
     </div>
   );
