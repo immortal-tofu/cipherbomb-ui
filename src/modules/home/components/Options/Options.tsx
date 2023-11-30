@@ -15,7 +15,6 @@ export const Options = () => {
 
   const onMute = () => {
     if (!muted) {
-      console.log('muted');
       muteMusic();
     } else {
       demuteMusic();
@@ -30,6 +29,9 @@ export const Options = () => {
       <div className="Options__menu">
         <div className={classNames('Options__link Options__link')}>
           <span onClick={onMute}>Music: {muted ? 'OFF' : 'ON'}</span>
+        </div>
+        <div className={classNames('Options__link Options__link--small Options__link')}>
+          <a href="https://faucet.zama.ai/">Get tokens on Zama Faucet</a>
         </div>
       </div>
     </div>

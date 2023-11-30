@@ -130,7 +130,11 @@ export const Connect: React.FC<{
   }, [account, provider, validNetwork, children, switchNetwork]);
 
   if (error) {
-    return <p>No wallet has been found.</p>;
+    return (
+      <p>
+        No wallet has been found. Install <a href="https://metamask.io/download/">Metamask</a> extension.
+      </p>
+    );
   }
 
   const connectInfos = (

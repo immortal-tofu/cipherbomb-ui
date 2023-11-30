@@ -1,0 +1,7 @@
+.Rules__list dt {
+  font-weight: bold;
+}
+.Rules__list dd {
+  margin-left: 0;
+  margin-bottom: 15px;
+}

@@ -28,7 +28,6 @@ export const demuteMusic = () => {
 };
 
 export const playMusic = () => {
-  console.log(muted);
   if (muted) return;
   if (enabled) {
     void musicAudio.play();
@@ -38,7 +37,6 @@ export const playMusic = () => {
 };
 
 export const pauseMusic = () => {
-  console.log('pause', enabled);
   if (enabled) {
     void musicAudio.pause();
   } else {
