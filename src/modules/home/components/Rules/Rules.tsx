@@ -51,8 +51,8 @@ export const Rules = () => {
       </dl>
       <Subtitle>How to play</Subtitle>
       <p>
-        The game is played over a maximum of 4 rounds uring which you attempt to identify vulnerabilities in other
-        players' cards in pursuit of achieving your goal.
+        The game is played over a maximum of <strong>4 rounds</strong> during which you attempt to identify
+        vulnerabilities in other players' cards in pursuit of achieving your goal.
       </p>
       <p>
         Beginning with the first player, select the player from whom you wish to draw a card. Encourage discussion and
@@ -61,11 +61,7 @@ export const Rules = () => {
       </p>
       <p>
         The round ends when the number of revealed cards equals the total number of players. Subsequently, all cards are
-        redistributed.
-      </p>
-      <p>
-        With each new round, each player has one card less than at the beginning of the previous round. A new round
-        begins.
+        redistributed. With each new round, each player has one card less than at the beginning of the previous round.
       </p>
       <p>The game ends immediately if one of the following three conditions is met:</p>
       <ul>
