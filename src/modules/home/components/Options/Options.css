@@ -1,0 +1,44 @@
+.Options__account {
+  text-overflow: ellipsis;
+  max-width: 80%;
+  overflow: hidden;
+}
+
+.Options__menu {
+  margin: 15px 0;
+}
+
+.Options__link {
+  display: flex;
+  align-items: center;
+}
+
+.Options__link a,
+.Options__link span {
+  font-family: Bungee;
+  font-size: 32px;
+  color: #fff;
+  text-shadow: -5px 5px 0 #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.Options__link a:hover,
+.Options__link span:hover {
+  color: var(--primary-color);
+}
+
+.Options__link--disabled a,
+.Options__link--disabled span {
+  color: #444 !important;
+  pointer-events: none;
+}
+
+.Options__link--small {
+  margin-top: 30px;
+}
+
+.Options__link--small a {
+  color: var(--fifth-color);
+  font-size: 1.4em;
+}

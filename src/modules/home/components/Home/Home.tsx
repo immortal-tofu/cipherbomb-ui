@@ -40,6 +40,9 @@ export const Home = ({ account, provider }: HomeProps) => {
           <Link to="/join">Join a room</Link>
         </div>
         <div className={classNames('Home__link Home__link', { 'Home__link--disabled': createLoading })}>
+          <Link to="/options">Options</Link>
+        </div>
+        <div className={classNames('Home__link Home__link', { 'Home__link--disabled': createLoading })}>
           <Link to="/rules">Rules</Link>
         </div>
         <div className={classNames('Home__link Home__link--small', { 'Home__link--disabled': createLoading })}>
