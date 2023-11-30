@@ -1,7 +1,8 @@
 .Home__account {
   text-overflow: ellipsis;
-  max-width: 80%;
+  max-width: 80vw;
   overflow: hidden;
+  line-height: 1.2em;
 }
 
 .Home__menu {
