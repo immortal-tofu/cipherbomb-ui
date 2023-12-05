@@ -23,13 +23,9 @@ export const About = () => {
 
       <Subtitle>Credits</Subtitle>
       <dl className="About__list">
-        <dt>Contract & dapp</dt>
+        <dt>Development & Graphic (AI)</dt>
         <dd>
           <a href="https://twitter.com/immortofu">immortal tofu</a>
-        </dd>
-        <dt>Graphics</dt>
-        <dd>
-          <a href="https://www.instagram.com/brice.eljeji/">Brice Eljeji</a>
         </dd>
         <dt>Music</dt>
         <dd>Eternal Lupin</dd>

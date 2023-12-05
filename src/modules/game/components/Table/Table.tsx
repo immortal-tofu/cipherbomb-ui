@@ -109,7 +109,7 @@ export const Table = ({ contract, account, players }: TableProps) => {
         <div>
           <Subtitle>Turn</Subtitle>
           <p>
-            Remaining wires: {remainingWires}
+            Remaining vulnerabilities: {remainingWires}
             <br />
             Cards left to be taken: {moveLeft}
             <br />
