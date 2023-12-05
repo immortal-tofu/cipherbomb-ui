@@ -102,6 +102,8 @@ export const Table = ({ contract, account, players }: TableProps) => {
     setDealInProgress(false);
   };
 
+  const inGame = players.some((p) => p.address === account);
+
   return (
     <div>
       <Title>Cipher Bomb</Title>
@@ -115,7 +117,7 @@ export const Table = ({ contract, account, players }: TableProps) => {
             <br />
             Current turn: {currentTurn + 1} ({5 - currentTurn} cards)
           </p>
-          {dealIsNeeded && (
+          {inGame && dealIsNeeded && (
             <div className="Table__deal">
               <Button onClick={onDeal} disabled={dealInProgress}>
                 Deal cards
@@ -124,14 +126,16 @@ export const Table = ({ contract, account, players }: TableProps) => {
             </div>
           )}
         </div>
-        <div>
-          <div className="Table__actions">
-            <Subtitle>Your role</Subtitle>
-            <p>
-              <Button onClick={onRole}>See my role</Button>
-            </p>
+        {inGame && (
+          <div>
+            <div className="Table__actions">
+              <Subtitle>Your role</Subtitle>
+              <p>
+                <Button onClick={onRole}>See my role</Button>
+              </p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
       <TablePlayers
         dealIsNeeded={dealIsNeeded}
