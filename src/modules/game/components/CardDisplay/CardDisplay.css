@@ -21,23 +21,23 @@
 }
 
 .CardDisplay__card.CardDisplay__bad {
-  --bg-card: url('https://christopherstarr.files.wordpress.com/2013/01/randall.jpg');
+  --bg-card: url('../../assets/badguy.jpg');
 }
 
 .CardDisplay__card.CardDisplay__good {
-  --bg-card: url('https://as1.ftcdn.net/v2/jpg/01/95/05/50/1000_F_195055061_A112Kvjh9Bq5FFkdLIAnmk8Lh0MRdLrd.jpg');
+  --bg-card: url('../../assets/goodguy.jpg');
 }
 
 .CardDisplay__card.CardDisplay__wire {
-  --bg-card: url('https://i.stack.imgur.com/K9jSi.jpg');
+  --bg-card: url('../../assets/wire.jpg');
 }
 
 .CardDisplay__card.CardDisplay__bomb {
-  --bg-card: url('https://media.gettyimages.com/id/185410981/fr/photo/a-time-bomb.jpg?s=612x612&w=gi&k=20&c=tLm5Onl-r9Sx7t9_p9h13nAJKWvr96piVWRXJdil_gM=');
+  --bg-card: url('../../assets/bomb.jpg');
 }
 
 .CardDisplay__card.CardDisplay__neutral {
-  --bg-card: url('https://cdn.akamai.steamstatic.com/steam/apps/1534200/ss_d0fcb94c4fc2cc1cc01ca46d5c31840da74d9694.600x338.jpg?t=1616065824');
+  --bg-card: url('../../assets/neutral.jpg');
 }
 
 /* Keyframes */

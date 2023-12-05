@@ -1,19 +1,20 @@
 .CardsDeck {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   margin-top: 15px;
 }
 
 .CardsDeck_cardContainer {
-  width: 60px;
-  margin: 0 10px;
+  width: 80px;
+  margin: 15px 7.5px;
 }
 
 .CardsDeck__card {
   position: relative;
-  width: 60px;
-  height: 100px;
-  --bg-card-verso: url('https://media.moddb.com/images/games/1/73/72356/screenshot.7.1.jpg');
+  width: 80px;
+  height: 128px;
+  --bg-card-verso: url('../../assets/card.jpg');
   background: #fff var(--bg-card-verso) no-repeat;
   background-size: cover;
   background-position: center center;
@@ -29,15 +30,15 @@
 }
 
 .CardsDeck__displayed.CardsDeck__wire {
-  --bg-card: url('https://i.stack.imgur.com/K9jSi.jpg');
+  --bg-card: url('../../assets/wire.jpg');
 }
 
 .CardsDeck__displayed.CardsDeck__bomb {
-  --bg-card: url('https://media.gettyimages.com/id/185410981/fr/photo/a-time-bomb.jpg?s=612x612&w=gi&k=20&c=tLm5Onl-r9Sx7t9_p9h13nAJKWvr96piVWRXJdil_gM=');
+  --bg-card: url('../../assets/bomb.jpg');
 }
 
 .CardsDeck__displayed.CardsDeck__neutral {
-  --bg-card: url('https://cdn.akamai.steamstatic.com/steam/apps/1534200/ss_d0fcb94c4fc2cc1cc01ca46d5c31840da74d9694.600x338.jpg?t=1616065824');
+  --bg-card: url('../../assets/neutral.jpg');
 }
 
 /* Keyframes */
@@ -45,7 +46,7 @@
   0% {
     left: 0px;
     background-image: var(--bg-card-verso);
-    width: 60px;
+    width: 80px;
     transform: skew(0deg, 0deg);
   }
   49% {
@@ -62,7 +63,7 @@
   100% {
     left: 0px;
     background-image: var(--bg-card);
-    width: 60px;
+    width: 80px;
     transform: skew(0deg, 0deg);
   }
 }
