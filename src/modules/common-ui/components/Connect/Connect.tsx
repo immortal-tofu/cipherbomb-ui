@@ -31,8 +31,8 @@ export const Connect: React.FC<{
 
   const refreshNetwork = useCallback(async () => {
     if (await hasValidNetwork()) {
-      await createFhevmInstance(account);
       setValidNetwork(true);
+      await createFhevmInstance(account);
     } else {
       setValidNetwork(false);
     }

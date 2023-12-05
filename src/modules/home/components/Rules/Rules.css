@@ -5,3 +5,17 @@
   margin-left: 0;
   margin-bottom: 15px;
 }
+
+.Rules__item {
+  display: flex;
+  align-items: center;
+}
+
+.Rules__item h3 {
+  margin: 0;
+}
+
+.Rules__card {
+  margin-right: 30px;
+  margin-bottom: 15px;
+}

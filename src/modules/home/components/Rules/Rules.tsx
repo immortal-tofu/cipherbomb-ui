@@ -1,4 +1,7 @@
 import { Back, Subtitle, Title } from '../../../common-ui';
+import bomb from '../../../game/assets/bomb.jpg';
+import neutral from '../../../game/assets/neutral.jpg';
+import wire from '../../../game/assets/wire.jpg';
 
 import './Rules.css';
 
@@ -41,14 +44,39 @@ export const Rules = () => {
         <dd>2 members of the Red Cipher</dd>
       </dl>
       <Subtitle>Cards</Subtitle>
-      <dl className="Rules__list">
-        <dt>Safe code</dt>
-        <dd>Nothing happens.</dd>
-        <dt>Vulnerability</dt>
-        <dd>Founding a vulnerability brings you close to victory if you are part of the Decryptors.</dd>
-        <dt>Bomb</dt>
-        <dd>Triggering the bomb encrypts the digital world and hands victory to the Red Cipher.</dd>
-      </dl>
+      <div className="Rules__list">
+        <div className="Rules__item">
+          <div className="Rules__card">
+            <img src={neutral} width="80" alt="Safe Code" />
+          </div>
+          <div>
+            <h3>Safe code</h3>
+            <div className="Rules__cardText">Nothing happens.</div>
+          </div>
+        </div>
+        <div className="Rules__item">
+          <div className="Rules__card">
+            <img src={wire} alt="Wire" width="80" />
+          </div>
+          <div>
+            <h3>Vulnerability</h3>
+            <div className="Rules__cardText">
+              Founding a vulnerability brings you close to victory if you are part of the Decryptors.
+            </div>
+          </div>
+        </div>
+        <div className="Rules__item">
+          <div className="Rules__card">
+            <img src={bomb} alt="Bomb" width="80" />
+          </div>
+          <div>
+            <h3>Bomb</h3>
+            <div className="Rules__cardText">
+              Triggering the bomb encrypts the digital world and hands victory to the Red Cipher.
+            </div>
+          </div>
+        </div>
+      </div>
       <Subtitle>How to play</Subtitle>
       <p>
         The game is played over a maximum of <strong>4 rounds</strong> during which you attempt to identify
