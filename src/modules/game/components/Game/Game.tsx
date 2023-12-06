@@ -37,11 +37,11 @@ export const Game = ({ account, provider }: GameProps) => {
       setContractLoading(false);
     };
 
-    if (!contractLoading && !contract) {
+    if (!contractLoading && contractAddress) {
       setContractLoading(true);
       void getContract(contractAddress!);
     }
-  }, [contractAddress]);
+  }, [contractAddress, provider]);
 
   useEffect(() => {
     const refreshPlayers = async () => {

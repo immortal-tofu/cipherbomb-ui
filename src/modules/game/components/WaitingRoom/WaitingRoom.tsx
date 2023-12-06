@@ -41,8 +41,10 @@ export const WaitingRoom = ({ contract, account, players, currentName = '' }: Wa
       setMinPlayers(await contract.MIN_PLAYERS());
       setMaxPlayers(await contract.MAX_PLAYERS());
     };
-    void refreshInformations();
-  }, [contract]);
+    if (account) {
+      void refreshInformations();
+    }
+  }, [contract, account]);
 
   const startGame = async () => {
     const startTx = await contract.start();
