@@ -32,6 +32,8 @@ export const Game = ({ account, provider }: GameProps) => {
       await provider.getSigner();
       const c = new Contract(address, abi, await provider.getSigner());
       setContract(c);
+      const isRunning = await getReadContract(c).gameRunning();
+      setGameIsRunning(isRunning);
       setContractLoading(false);
     };
 
@@ -136,7 +138,7 @@ export const Game = ({ account, provider }: GameProps) => {
     }
   }, [contract]);
 
-  if (!contract) {
+  if (!contract || contractLoading) {
     return <div></div>;
   }
 

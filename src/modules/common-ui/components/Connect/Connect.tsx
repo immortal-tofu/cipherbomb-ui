@@ -21,8 +21,10 @@ export const Connect: React.FC<{
   const provider = new BrowserProvider(window.ethereum);
 
   const refreshAccounts = (accounts: string[]) => {
-    setAccount(getAddress(accounts[0]) || '');
+    const acc = getAddress(accounts[0]) || '';
+    setAccount(acc);
     setConnected(accounts.length > 0);
+    return acc;
   };
 
   const hasValidNetwork = async (): Promise<boolean> => {
@@ -30,10 +32,10 @@ export const Connect: React.FC<{
     return AUTHORIZED_CHAIN_ID.includes(currentChainId.toLowerCase());
   };
 
-  const refreshNetwork = async () => {
+  const refreshNetwork = async (acc: string) => {
     if (await hasValidNetwork()) {
       setValidNetwork(true);
-      await createFhevmInstance(account);
+      await createFhevmInstance(acc);
     } else {
       setValidNetwork(false);
     }
@@ -49,8 +51,8 @@ export const Connect: React.FC<{
     provider
       .send('eth_accounts', [])
       .then(async (accounts: string[]) => {
-        refreshAccounts(accounts);
-        await refreshNetwork();
+        const acc = refreshAccounts(accounts);
+        await refreshNetwork(acc);
       })
       .catch(() => {
         // Do nothing
