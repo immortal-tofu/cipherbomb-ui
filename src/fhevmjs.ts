@@ -14,12 +14,14 @@ export const createFhevmInstance = async (account: string) => {
   const network = await provider.getNetwork();
   const chainId = +network.chainId.toString();
   const publicKey = await provider.call({
-    from: null,
-    to: '0x0000000000000000000000000000000000000044',
+    to: '0x000000000000000000000000000000000000005d',
+    data: '0xd9d47bb001',
   });
+
   const strKP = getStorage(account);
   const keypairs: ExportedContractKeypairs | undefined = strKP ? JSON.parse(strKP) : undefined;
   instances[account] = await createInstance({ chainId, publicKey, keypairs });
+  console.log(publicKey);
 };
 
 const getStorageKey = (account: string) => {
