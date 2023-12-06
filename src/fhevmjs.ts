@@ -1,3 +1,4 @@
+import { AbiCoder } from 'ethers';
 import { BrowserProvider, getAddress } from 'ethers';
 import { ExportedContractKeypairs, FhevmInstance, createInstance, initFhevm } from 'fhevmjs';
 
@@ -13,10 +14,12 @@ export const createFhevmInstance = async (account: string) => {
   const provider = new BrowserProvider(window.ethereum);
   const network = await provider.getNetwork();
   const chainId = +network.chainId.toString();
-  const publicKey = await provider.call({
+  const ret = await provider.call({
     to: '0x000000000000000000000000000000000000005d',
     data: '0xd9d47bb001',
   });
+  const decoded = AbiCoder.defaultAbiCoder().decode(['bytes'], ret);
+  const publicKey = decoded[0];
   const strKP = getStorage(account);
   const keypairs: ExportedContractKeypairs | undefined = strKP ? JSON.parse(strKP) : undefined;
   instances[account] = await createInstance({ chainId, publicKey, keypairs });
