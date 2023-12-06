@@ -25,10 +25,11 @@ export const getEventContract = (contract: Contract): Contract => {
 };
 
 export const onNextBlock = (fn: () => void | Promise<void>) => {
-  const provider = getWsProvider();
-  const execFn = () => {
-    void fn();
-    void provider.off('block', execFn);
-  };
-  void provider.on('block', execFn);
+  // const provider = getWsProvider();
+  // const execFn = () => {
+  //   void fn();
+  //   void provider.off('block', execFn);
+  // };
+  // void provider.on('block', execFn);
+  void fn();
 };
