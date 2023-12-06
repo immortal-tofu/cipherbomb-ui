@@ -17,7 +17,8 @@ export const Connect: React.FC<{
   const [validNetwork, setValidNetwork] = useState(false);
   const [account, setAccount] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
-  const [provider, setProvider] = useState<BrowserProvider | null>(null);
+
+  const provider = new BrowserProvider(window.ethereum);
 
   const refreshAccounts = (accounts: string[]) => {
     setAccount(getAddress(accounts[0]) || '');
@@ -29,19 +30,13 @@ export const Connect: React.FC<{
     return AUTHORIZED_CHAIN_ID.includes(currentChainId.toLowerCase());
   };
 
-  const refreshNetwork = useCallback(async () => {
+  const refreshNetwork = async () => {
     if (await hasValidNetwork()) {
       setValidNetwork(true);
       await createFhevmInstance(account);
     } else {
       setValidNetwork(false);
     }
-  }, [account]);
-
-  const refreshProvider = (eth: Eip1193Provider) => {
-    const p = new BrowserProvider(eth);
-    setProvider(p);
-    return p;
   };
 
   useEffect(() => {
@@ -51,9 +46,8 @@ export const Connect: React.FC<{
       return;
     }
 
-    const p = refreshProvider(eth);
-
-    p.send('eth_accounts', [])
+    provider
+      .send('eth_accounts', [])
       .then(async (accounts: string[]) => {
         refreshAccounts(accounts);
         await refreshNetwork();
@@ -63,12 +57,9 @@ export const Connect: React.FC<{
       });
     eth.on('accountsChanged', refreshAccounts);
     eth.on('chainChanged', refreshNetwork);
-  }, [refreshNetwork]);
+  }, []);
 
   const connect = async () => {
-    if (!provider) {
-      return;
-    }
     const accounts: string[] = await provider.send('eth_requestAccounts', []);
 
     if (accounts.length > 0) {
@@ -105,7 +96,7 @@ export const Connect: React.FC<{
       });
     }
     await refreshNetwork();
-  }, [refreshNetwork]);
+  }, []);
 
   const child = useMemo<React.ReactNode>(() => {
     if (!account || !provider) {
@@ -127,7 +118,7 @@ export const Connect: React.FC<{
     }
 
     return children(account, provider);
-  }, [account, provider, validNetwork, children, switchNetwork]);
+  }, [account, validNetwork, children, switchNetwork]);
 
   if (error) {
     return (

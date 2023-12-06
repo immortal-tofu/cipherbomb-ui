@@ -50,11 +50,7 @@ const router = createHashRouter([
       }
       return null;
     },
-    element: (
-      <React.StrictMode>
-        <App>{(account, provider) => <Game account={account} provider={provider} />}</App>
-      </React.StrictMode>
-    ),
+    element: <App>{(account, provider) => <Game account={account} provider={provider} />}</App>,
   },
   {
     path: 'about',

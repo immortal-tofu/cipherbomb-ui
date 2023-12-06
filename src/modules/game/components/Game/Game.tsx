@@ -23,6 +23,7 @@ export const Game = ({ account, provider }: GameProps) => {
   const [gameIsRunning, setGameIsRunning] = useState<boolean>(false);
   const [players, setPlayers] = useState<{ name: string; address: string }[]>([]);
   const [endGame, setEndGame] = useState<'bad' | 'good' | 'bomb' | null>(null);
+  const [contractLoading, setContractLoading] = useState(false);
 
   const { contractAddress } = useParams();
 
@@ -31,15 +32,36 @@ export const Game = ({ account, provider }: GameProps) => {
       await provider.getSigner();
       const c = new Contract(address, abi, await provider.getSigner());
       setContract(c);
+      setContractLoading(false);
     };
 
-    if (provider && account && contractAddress) {
-      void getContract(contractAddress);
+    if (!contractLoading && !contract) {
+      setContractLoading(true);
+      void getContract(contractAddress!);
     }
-  }, [provider, account, contractAddress]);
+  }, [contractAddress]);
 
-  const onPlayerNameChanged = useCallback(
-    (player: string, name: string) => {
+  useEffect(() => {
+    const refreshPlayers = async () => {
+      if (contract) {
+        const playerWithNames: { name: string; address: string }[] = [];
+        const nop: bigint = await getReadContract(contract).numberOfPlayers();
+        for (let i = 0; i < nop; i += 1) {
+          const address = getAddress(await getReadContract(contract).players(i));
+          const name = await getReadContract(contract).name(address);
+          playerWithNames.push({ name, address });
+        }
+        setPlayers(playerWithNames);
+      }
+    };
+
+    const refreshInformations = async () => {
+      if (!contract) return;
+      const isRunning = await getReadContract(contract).gameRunning();
+      setGameIsRunning(isRunning);
+    };
+
+    const onPlayerNameChanged = (player: string, name: string) => {
       const newPlayers = players.map((p) => {
         if (p.address === getAddress(player)) {
           return { ...p, name };
@@ -47,53 +69,24 @@ export const Game = ({ account, provider }: GameProps) => {
         return p;
       });
       setPlayers(newPlayers);
-    },
-    [players],
-  );
+    };
 
-  const onPlayerJoined = useCallback(
-    async (address: string) => {
+    const onPlayerJoined = async (address: string) => {
       if (contract) {
         const name = await getReadContract(contract).name(address);
         const newPlayers = [...players, { address, name }];
         console.log(newPlayers);
         setPlayers(newPlayers);
       }
-    },
-    [players, contract],
-  );
+    };
 
-  const onPlayerLeave = useCallback(
-    (player: string) => {
+    const onPlayerLeave = (player: string) => {
       const newPlayers = players.filter(({ address }) => address != player);
 
       console.log(newPlayers);
       setPlayers(newPlayers);
-    },
-    [players],
-  );
+    };
 
-  const refreshPlayers = useCallback(async () => {
-    if (contract) {
-      const playerWithNames: { name: string; address: string }[] = [];
-      const nop: bigint = await getReadContract(contract).numberOfPlayers();
-      for (let i = 0; i < nop; i += 1) {
-        const address = getAddress(await getReadContract(contract).players(i));
-        const name = await getReadContract(contract).name(address);
-        playerWithNames.push({ name, address });
-      }
-      setPlayers(playerWithNames);
-    }
-  }, [contract]);
-
-  const refreshInformations = useCallback(async () => {
-    if (contract) {
-      const isRunning = await getReadContract(contract).gameRunning();
-      setGameIsRunning(isRunning);
-    }
-  }, [contract]);
-
-  useEffect(() => {
     const gameHasStarted = () => {
       onNextBlock(() => {
         void new Audio(begin).play();
@@ -119,6 +112,9 @@ export const Game = ({ account, provider }: GameProps) => {
     };
 
     if (contract) {
+      console.log('on');
+      void refreshInformations();
+      void refreshPlayers();
       const gameContract = getEventContract(contract);
       void gameContract.on(gameContract.filters.GameOpen, gameHasBeenOpen);
       void gameContract.on(gameContract.filters.GameStart, gameHasStarted);
@@ -128,6 +124,7 @@ export const Game = ({ account, provider }: GameProps) => {
       void gameContract.on(gameContract.filters.GoodGuysWin, onGoodGuysWin);
       void gameContract.on(gameContract.filters.BadGuysWin, onBadGuysWin);
       return () => {
+        console.log('off');
         void gameContract.off(gameContract.filters.GameOpen, gameHasBeenOpen);
         void gameContract.off(gameContract.filters.GameStart, gameHasStarted);
         void gameContract.off(gameContract.filters.PlayerNameChanged, onPlayerNameChanged);
@@ -137,12 +134,7 @@ export const Game = ({ account, provider }: GameProps) => {
         void gameContract.off(gameContract.filters.BadGuysWin, onBadGuysWin);
       };
     }
-  }, [contract, refreshPlayers, refreshInformations, onPlayerNameChanged, onPlayerJoined, onPlayerLeave]);
-
-  useEffect(() => {
-    void refreshInformations();
-    void refreshPlayers();
-  }, [refreshInformations, refreshPlayers]);
+  }, [contract]);
 
   if (!contract) {
     return <div></div>;
