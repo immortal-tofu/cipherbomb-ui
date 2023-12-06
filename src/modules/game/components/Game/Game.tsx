@@ -117,23 +117,26 @@ export const Game = ({ account, provider }: GameProps) => {
       console.log('on');
       void refreshInformations();
       void refreshPlayers();
-      const gameContract = getEventContract(contract);
-      void gameContract.on(gameContract.filters.GameOpen, gameHasBeenOpen);
-      void gameContract.on(gameContract.filters.GameStart, gameHasStarted);
-      void gameContract.on(gameContract.filters.PlayerNameChanged, onPlayerNameChanged);
-      void gameContract.on(gameContract.filters.PlayerJoined, onPlayerJoined);
-      void gameContract.on(gameContract.filters.PlayerKicked, onPlayerLeave);
-      void gameContract.on(gameContract.filters.GoodGuysWin, onGoodGuysWin);
-      void gameContract.on(gameContract.filters.BadGuysWin, onBadGuysWin);
+      void getEventContract(contract).then((gameContract) => {
+        void gameContract.on(gameContract.filters.GameOpen, gameHasBeenOpen);
+        void gameContract.on(gameContract.filters.GameStart, gameHasStarted);
+        void gameContract.on(gameContract.filters.PlayerNameChanged, onPlayerNameChanged);
+        void gameContract.on(gameContract.filters.PlayerJoined, onPlayerJoined);
+        void gameContract.on(gameContract.filters.PlayerKicked, onPlayerLeave);
+        void gameContract.on(gameContract.filters.GoodGuysWin, onGoodGuysWin);
+        void gameContract.on(gameContract.filters.BadGuysWin, onBadGuysWin);
+      });
       return () => {
         console.log('off');
-        void gameContract.off(gameContract.filters.GameOpen, gameHasBeenOpen);
-        void gameContract.off(gameContract.filters.GameStart, gameHasStarted);
-        void gameContract.off(gameContract.filters.PlayerNameChanged, onPlayerNameChanged);
-        void gameContract.off(gameContract.filters.PlayerJoined, onPlayerJoined);
-        void gameContract.off(gameContract.filters.PlayerKicked, onPlayerLeave);
-        void gameContract.off(gameContract.filters.GoodGuysWin, onGoodGuysWin);
-        void gameContract.off(gameContract.filters.BadGuysWin, onBadGuysWin);
+        void getEventContract(contract).then((gameContract) => {
+          void gameContract.off(gameContract.filters.GameOpen, gameHasBeenOpen);
+          void gameContract.off(gameContract.filters.GameStart, gameHasStarted);
+          void gameContract.off(gameContract.filters.PlayerNameChanged, onPlayerNameChanged);
+          void gameContract.off(gameContract.filters.PlayerJoined, onPlayerJoined);
+          void gameContract.off(gameContract.filters.PlayerKicked, onPlayerLeave);
+          void gameContract.off(gameContract.filters.GoodGuysWin, onGoodGuysWin);
+          void gameContract.off(gameContract.filters.BadGuysWin, onBadGuysWin);
+        });
       };
     }
   }, [contract]);

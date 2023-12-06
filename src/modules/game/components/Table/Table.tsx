@@ -69,12 +69,15 @@ export const Table = ({ contract, account, players }: TableProps) => {
     };
 
     if (contract) {
-      const gameContract = getEventContract(contract);
-      void gameContract.on(gameContract.filters.CardPicked, onCardPicked);
-      void gameContract.on(gameContract.filters.GoodDeal, onGoodDeal);
-      return () => {
-        void gameContract.off(gameContract.filters.CardPicked, onCardPicked);
+      void getEventContract(contract).then((gameContract) => {
+        void gameContract.on(gameContract.filters.CardPicked, onCardPicked);
         void gameContract.on(gameContract.filters.GoodDeal, onGoodDeal);
+      });
+      return () => {
+        void getEventContract(contract).then((gameContract) => {
+          void gameContract.off(gameContract.filters.CardPicked, onCardPicked);
+          void gameContract.on(gameContract.filters.GoodDeal, onGoodDeal);
+        });
       };
     }
   }, [contract, refresh]);
