@@ -6,6 +6,7 @@
   box-shadow: -5px 5px 0 #000;
   outline: 0;
   padding: 7px;
+  color: #000;
 }
 
 .Button:hover {
