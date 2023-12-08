@@ -39,7 +39,7 @@ export const Game = ({ account, provider }: GameProps) => {
 
     if (!contractLoading && contractAddress) {
       setContractLoading(true);
-      void getContract(contractAddress!);
+      void getContract(contractAddress);
     }
   }, [contractAddress, provider]);
 
@@ -61,32 +61,6 @@ export const Game = ({ account, provider }: GameProps) => {
       if (!contract) return;
       const isRunning = await getReadContract(contract).gameRunning();
       setGameIsRunning(isRunning);
-    };
-
-    const onPlayerNameChanged = (player: string, name: string) => {
-      const newPlayers = players.map((p) => {
-        if (p.address === getAddress(player)) {
-          return { ...p, name };
-        }
-        return p;
-      });
-      setPlayers(newPlayers);
-    };
-
-    const onPlayerJoined = async (address: string) => {
-      if (contract) {
-        const name = await getReadContract(contract).name(address);
-        const newPlayers = [...players, { address, name }];
-        console.log(newPlayers);
-        setPlayers(newPlayers);
-      }
-    };
-
-    const onPlayerLeave = (player: string) => {
-      const newPlayers = players.filter(({ address }) => address != player);
-
-      console.log(newPlayers);
-      setPlayers(newPlayers);
     };
 
     const gameHasStarted = () => {
@@ -120,9 +94,6 @@ export const Game = ({ account, provider }: GameProps) => {
       void getEventContract(contract).then((gameContract) => {
         void gameContract.on(gameContract.filters.GameOpen, gameHasBeenOpen);
         void gameContract.on(gameContract.filters.GameStart, gameHasStarted);
-        void gameContract.on(gameContract.filters.PlayerNameChanged, onPlayerNameChanged);
-        void gameContract.on(gameContract.filters.PlayerJoined, onPlayerJoined);
-        void gameContract.on(gameContract.filters.PlayerKicked, onPlayerLeave);
         void gameContract.on(gameContract.filters.GoodGuysWin, onGoodGuysWin);
         void gameContract.on(gameContract.filters.BadGuysWin, onBadGuysWin);
       });
@@ -131,15 +102,57 @@ export const Game = ({ account, provider }: GameProps) => {
         void getEventContract(contract).then((gameContract) => {
           void gameContract.off(gameContract.filters.GameOpen, gameHasBeenOpen);
           void gameContract.off(gameContract.filters.GameStart, gameHasStarted);
-          void gameContract.off(gameContract.filters.PlayerNameChanged, onPlayerNameChanged);
-          void gameContract.off(gameContract.filters.PlayerJoined, onPlayerJoined);
-          void gameContract.off(gameContract.filters.PlayerKicked, onPlayerLeave);
           void gameContract.off(gameContract.filters.GoodGuysWin, onGoodGuysWin);
           void gameContract.off(gameContract.filters.BadGuysWin, onBadGuysWin);
         });
       };
     }
   }, [contract]);
+
+  useEffect(() => {
+    const onPlayerNameChanged = (player: string, name: string) => {
+      const newPlayers = players.map((p) => {
+        if (p.address === getAddress(player)) {
+          return { ...p, name };
+        }
+        return p;
+      });
+      setPlayers(newPlayers);
+    };
+
+    const onPlayerJoined = async (address: string) => {
+      if (contract) {
+        const name = await getReadContract(contract).name(address);
+        const newPlayers = [...players, { address, name }];
+        console.log(newPlayers);
+        setPlayers(newPlayers);
+      }
+    };
+
+    const onPlayerLeave = (player: string) => {
+      const newPlayers = players.filter(({ address }) => address != player);
+
+      console.log(newPlayers);
+      setPlayers(newPlayers);
+    };
+
+    if (contract && players.length) {
+      console.log('on players');
+      void getEventContract(contract).then((gameContract) => {
+        void gameContract.on(gameContract.filters.PlayerNameChanged, onPlayerNameChanged);
+        void gameContract.on(gameContract.filters.PlayerJoined, onPlayerJoined);
+        void gameContract.on(gameContract.filters.PlayerKicked, onPlayerLeave);
+      });
+      return () => {
+        console.log('off players');
+        void getEventContract(contract).then((gameContract) => {
+          void gameContract.off(gameContract.filters.PlayerNameChanged, onPlayerNameChanged);
+          void gameContract.off(gameContract.filters.PlayerJoined, onPlayerJoined);
+          void gameContract.off(gameContract.filters.PlayerKicked, onPlayerLeave);
+        });
+      };
+    }
+  }, [contract, players]);
 
   if (!contract || contractLoading) {
     return <div></div>;
