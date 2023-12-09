@@ -1,5 +1,4 @@
 import { BrowserProvider, getAddress } from 'ethers';
-import { Eip1193Provider } from 'ethers';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { createFhevmInstance } from '../../../../fhevmjs';
@@ -97,7 +96,7 @@ export const Connect: React.FC<{
         ],
       });
     }
-    await refreshNetwork();
+    await refreshNetwork(account);
   }, []);
 
   const child = useMemo<React.ReactNode>(() => {

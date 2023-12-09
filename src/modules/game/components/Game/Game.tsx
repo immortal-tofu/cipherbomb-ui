@@ -1,5 +1,5 @@
 import { BrowserProvider, Contract, getAddress } from 'ethers';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { abi } from '../../../../abi/cipherbomb.json';
